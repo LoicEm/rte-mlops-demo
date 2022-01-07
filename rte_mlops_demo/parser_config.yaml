@@ -1,0 +1,11 @@
+flux_prefix: "flux_"
+production_types:
+  - bioenergies
+  - ech_physiques
+  - eolien
+  - hydraulique
+  - nucleaire
+  - pompage
+  - solaire
+  - thermique
+consumption: "consommation"
