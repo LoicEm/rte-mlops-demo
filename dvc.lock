@@ -1,0 +1,12 @@
+schema: '2.0'
+stages:
+  build_dataset:
+    cmd: python -m rte_mlops_demo.build_dataset -d rte_mlops_demo/scraper.py rte_mlops_demo/parser_config.yaml
+    params:
+      params.yaml:
+        build_dataset.end_date: '2021-12-31'
+        build_dataset.start_date: '2019-01-01'
+    outs:
+    - path: data/raw_dataset.csv
+      md5: 394dcce2002c4472394f42f3aa95dbae
+      size: 30152599

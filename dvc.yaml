@@ -1,0 +1,8 @@
+stages:
+  build_dataset:
+    cmd: python -m rte_mlops_demo.build_dataset -d rte_mlops_demo/scraper.py rte_mlops_demo/parser_config.yaml
+    params:
+    - build_dataset.end_date
+    - build_dataset.start_date
+    outs:
+    - data/raw_dataset.csv
