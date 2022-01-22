@@ -8,5 +8,5 @@ stages:
         build_dataset.start_date: '2019-01-01'
     outs:
     - path: data/raw_dataset.csv
-      md5: 394dcce2002c4472394f42f3aa95dbae
-      size: 30152599
+      md5: eae0e23c4c887e81146ecfcb5a0182c0
+      size: 16683

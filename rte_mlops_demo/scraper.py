@@ -31,9 +31,10 @@ class QueryEnergyProduction:
     def query_regional_production_live(self):
         """Query regional data on production on the past day.
         This will create duplicates."""
-        params = self.get_query_params(n_rows=self.n_hits)
+        params = self.get_query_params(n_rows=self._n_hits)
         res = requests.get(API_URL, params=params)
-        return res.json()
+
+        yield from res.json()["records"]
 
     def get_query_params(self, n_rows: int):
         query_datetime = get_datetime_query_param(
@@ -54,7 +55,6 @@ class QueryEnergyProduction:
     @property
     def n_hits(self):
         if self._n_hits is None:
-            logger.debug("")
             self._n_hits = self.query_n_hits()
         return self._n_hits
 
@@ -62,7 +62,11 @@ class QueryEnergyProduction:
         params = self.get_query_params(n_rows=0)
         logger.debug(f"Getting number of hits on period {params['q']}")
         res = requests.get(API_URL, params=params).json()
-        return res["nhits"]
+        n_hits = res["nhits"]
+        if n_hits > 10_000:
+            raise ValueError(
+                "No more than 10 000 rows can be queried at once, please refine you query"
+            )
 
 
 def get_datetime_query_param(start_datetime, end_datetime) -> str:
@@ -71,8 +75,8 @@ def get_datetime_query_param(start_datetime, end_datetime) -> str:
     return f"date_heure:[{start} TO {end}]"
 
 
-def parse_response(response, on_keyerror="raise"):
-    for record in response["records"]:
+def parse_response(records, on_keyerror="raise"):
+    for record in records:
         try:
             yield RecordParser(record).parse()
         except KeyError as err:
