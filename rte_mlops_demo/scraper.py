@@ -16,8 +16,14 @@ RECORDS_PARSING_CONFIG = os.path.join(os.path.dirname(__file__), "parser_config.
 
 
 class QueryEnergyProduction:
-    def __init__(self, reference_datetime: arrow.Arrow, live_query: bool = True):
-        self.reference_datetime = reference_datetime
+    def __init__(
+        self,
+        start_datetime: arrow.Arrow,
+        end_datetime: arrow.Arrow,
+        live_query: bool = True,
+    ):
+        self.start_datetime = start_datetime
+        self.end_datetime = end_datetime
         self.live_query = live_query
 
         self._n_hits = None
@@ -30,12 +36,19 @@ class QueryEnergyProduction:
         return res.json()
 
     def get_query_params(self, n_rows: int):
-        query_datetime = get_datetime_query_param(self.reference_datetime)
+        query_datetime = get_datetime_query_param(
+            self.start_datetime, self.end_datetime
+        )
         if self.live_query:
             dataset = LIVE_DATASET
         else:
             dataset = CONSOLIDATED_DATASET
-        params = {"dataset": dataset, "q": query_datetime, "rows": n_rows}
+        params = {
+            "dataset": dataset,
+            "q": query_datetime,
+            "rows": n_rows,
+            "refine.code_insee_region": "11",  # Query only Ile-de-France
+        }
         return params
 
     @property
@@ -52,9 +65,9 @@ class QueryEnergyProduction:
         return res["nhits"]
 
 
-def get_datetime_query_param(end_datetime) -> str:
-    start = end_datetime.shift(days=-1).format("YYYY-MM-DDTHH:mm")
+def get_datetime_query_param(start_datetime, end_datetime) -> str:
     end = end_datetime.format("YYYY-MM-DDTHH:mm")
+    start = start_datetime.format("YYYY-MM-DDTHH:mm")
     return f"date_heure:[{start} TO {end}]"
 
 
