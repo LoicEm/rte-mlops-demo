@@ -16,7 +16,7 @@ stages:
         cache: false
     deps:
     - data
-    - rmlops_demo/
+    - rte_mlops_demo/
     params:
     - build_dataset
     outs:
