@@ -10,3 +10,16 @@ stages:
     - path: data/raw_dataset.csv
       md5: eae0e23c4c887e81146ecfcb5a0182c0
       size: 16683
+  train:
+    cmd: python -m rte_mlops_demo.train
+    deps:
+    - path: rte_mlops_demo/metrics.py
+      md5: d91fad3fef043aeeed3cc0b2006e91d0
+      size: 709
+    - path: rte_mlops_demo/train.py
+      md5: c5f32655f87100b397751f77db8298f7
+      size: 1178
+    outs:
+    - path: metrics.yaml
+      md5: 47e7092dabf8d5da9c8c96dfedcabf93
+      size: 28
