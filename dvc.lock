@@ -7,16 +7,16 @@ stages:
       md5: be77791b53cda0d143197e8af1973645
       size: 2376
     - path: rte_mlops_demo/scraper.py
-      md5: 475b9fa8effbd40c5f5afdb919cca715
-      size: 4191
+      md5: ca24d7d04a3a8c766086c96cce23eba5
+      size: 4212
     params:
       params.yaml:
         build_dataset.end_date: '2021-12-31'
         build_dataset.start_date: '2019-01-01'
     outs:
     - path: data/raw_dataset.csv
-      md5: 8cbb146e9f1226b0c52f4699aa82352b
-      size: 16688
+      md5: 0e6ea58b1b9c008ec1014d3bce79da3e
+      size: 2425603
   train:
     cmd: python -m rte_mlops_demo.train
     deps:
