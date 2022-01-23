@@ -21,6 +21,3 @@ stages:
     - build_dataset
     outs:
     - models
-    plots:
-    - plots:
-        cache: false
