@@ -31,7 +31,7 @@ class QueryEnergyProduction:
     def query_regional_production_live(self):
         """Query regional data on production on the past day.
         This will create duplicates."""
-        params = self.get_query_params(n_rows=self._n_hits)
+        params = self.get_query_params(n_rows=self.n_hits)
         res = requests.get(API_URL, params=params)
 
         yield from res.json()["records"]
@@ -67,6 +67,7 @@ class QueryEnergyProduction:
             raise ValueError(
                 "No more than 10 000 rows can be queried at once, please refine you query"
             )
+        return n_hits
 
 
 def get_datetime_query_param(start_datetime, end_datetime) -> str:
