@@ -7,13 +7,20 @@ stages:
     outs:
     - data/raw_dataset.csv
     deps:
-      - rte_mlops_demo/scraper.py
-      - rte_mlops_demo/build_dataset.py
+    - rte_mlops_demo/scraper.py
+    - rte_mlops_demo/build_dataset.py
   train:
     cmd: python -m rte_mlops_demo.train
     metrics:
-    - metrics.yaml:
+    - metrics.json:
         cache: false
     deps:
-    - rte_mlops_demo/metrics.py
-    - rte_mlops_demo/train.py
+    - data
+    - rte_mlops_demo/
+    params:
+    - build_dataset
+    outs:
+    - models
+    plots:
+    - plots:
+        cache: false

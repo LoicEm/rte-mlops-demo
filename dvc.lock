@@ -1,15 +1,22 @@
 schema: '2.0'
 stages:
   build_dataset:
-    cmd: python -m rte_mlops_demo.build_dataset -d rte_mlops_demo/scraper.py rte_mlops_demo/parser_config.yaml
+    cmd: python -m rte_mlops_demo.build_dataset rte_mlops_demo/parser_config.yaml
+    deps:
+    - path: rte_mlops_demo/build_dataset.py
+      md5: be77791b53cda0d143197e8af1973645
+      size: 2376
+    - path: rte_mlops_demo/scraper.py
+      md5: 475b9fa8effbd40c5f5afdb919cca715
+      size: 4191
     params:
       params.yaml:
         build_dataset.end_date: '2021-12-31'
         build_dataset.start_date: '2019-01-01'
     outs:
     - path: data/raw_dataset.csv
-      md5: eae0e23c4c887e81146ecfcb5a0182c0
-      size: 16683
+      md5: 8cbb146e9f1226b0c52f4699aa82352b
+      size: 16688
   train:
     cmd: python -m rte_mlops_demo.train
     deps:
@@ -17,9 +24,9 @@ stages:
       md5: d91fad3fef043aeeed3cc0b2006e91d0
       size: 709
     - path: rte_mlops_demo/train.py
-      md5: c5f32655f87100b397751f77db8298f7
+      md5: 19b5339e8a79d66eeafe943e94e783d3
       size: 1178
     outs:
     - path: metrics.yaml
-      md5: 47e7092dabf8d5da9c8c96dfedcabf93
+      md5: fc44a823808d044129e58db1bbcc595e
       size: 28
