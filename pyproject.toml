@@ -11,7 +11,8 @@ requests = "^2.27.1"
 PyYAML = "^6.0"
 dvc = "^2.9.3"
 tqdm = "^4.62.3"
-sktime = "^0.9.0"
+sktime = {version = "^0.9.0"}
+pmdarima = "^1.8.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
