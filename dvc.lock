@@ -25,7 +25,7 @@ stages:
       size: 29925249
       nfiles: 2
     - path: rte_mlops_demo/
-      md5: a54955ea5cf242810eea5c469bd0e4c6.dir
+      md5: fa6931572af49762ed7ddc856909b5ac.dir
       size: 18223
       nfiles: 11
     params:
