@@ -7,7 +7,7 @@ import pandas as pd
 import sktime
 
 from sktime.forecasting.model_selection import temporal_train_test_split
-from sktime.forecasting.arima import AutoARIMA
+from sktime.forecasting.naive import NaiveForecaster
 
 from rte_mlops_demo.metrics import fc_mape
 
@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
     # Create a test set of 7 days
     y_train, y_test = temporal_train_test_split(y, test_size=2 * 24 * 7)
-    forecaster = AutoARIMA()
+    forecaster = NaiveForecaster()
     forecaster.fit(y_train)
     y_pred = forecaster.predict(np.arange(1, y_test.size + 1))
 
