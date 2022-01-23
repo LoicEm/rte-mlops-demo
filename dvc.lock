@@ -7,26 +7,26 @@ stages:
       md5: be77791b53cda0d143197e8af1973645
       size: 2376
     - path: rte_mlops_demo/scraper.py
-      md5: 475b9fa8effbd40c5f5afdb919cca715
-      size: 4191
+      md5: ca24d7d04a3a8c766086c96cce23eba5
+      size: 4212
     params:
       params.yaml:
         build_dataset.end_date: '2021-12-31'
         build_dataset.start_date: '2019-01-01'
     outs:
     - path: data/raw_dataset.csv
-      md5: 8cbb146e9f1226b0c52f4699aa82352b
-      size: 16688
+      md5: 0e6ea58b1b9c008ec1014d3bce79da3e
+      size: 2425603
   train:
     cmd: python -m rte_mlops_demo.train
     deps:
     - path: data
-      md5: 7b75c5b31a368c88198eb477ddecb8c9.dir
-      size: 29925249
-      nfiles: 2
+      md5: a24c45dbbb7a499757148c7f07da5992.dir
+      size: 2425603
+      nfiles: 1
     - path: rte_mlops_demo/
-      md5: 78c5aba3953a4336e6d3a8d01c173971.dir
-      size: 18205
+      md5: b48fa9d3fb02d6a6e6fc1a9c05920a0b.dir
+      size: 18297
       nfiles: 11
     params:
       params.yaml:
@@ -35,9 +35,9 @@ stages:
           end_date: '2021-12-31'
     outs:
     - path: metrics.json
-      md5: fc44a823808d044129e58db1bbcc595e
+      md5: d2fc25ff710ba093ab82362b85cb66b8
       size: 28
     - path: models
-      md5: b2f3fd97667ffe035495d81fe46a781a.dir
-      size: 83620
+      md5: 2beeb1e677ffa5a0a380b90f327120e7.dir
+      size: 3347910
       nfiles: 1
