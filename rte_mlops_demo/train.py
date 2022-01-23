@@ -1,5 +1,6 @@
 """Train the module and get the useful metrics."""
 import json
+import pathlib
 
 import joblib
 import numpy as np
@@ -22,7 +23,9 @@ def save_metrics(metrics: dict):
 
 
 def save_model(model):
-    joblib.dump(model, "models/model.joblib")
+    models_path = pathlib.Path("models")
+    models_path.mkdir(parents=True, exist_ok=True)
+    joblib.dump(model, models_path / "model.joblib")
 
 
 if __name__ == "__main__":

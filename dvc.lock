@@ -20,13 +20,24 @@ stages:
   train:
     cmd: python -m rte_mlops_demo.train
     deps:
-    - path: rte_mlops_demo/metrics.py
-      md5: d91fad3fef043aeeed3cc0b2006e91d0
-      size: 709
-    - path: rte_mlops_demo/train.py
-      md5: 19b5339e8a79d66eeafe943e94e783d3
-      size: 1178
+    - path: data
+      md5: 7b75c5b31a368c88198eb477ddecb8c9.dir
+      size: 29925249
+      nfiles: 2
+    - path: rte_mlops_demo/
+      md5: a54955ea5cf242810eea5c469bd0e4c6.dir
+      size: 18223
+      nfiles: 11
+    params:
+      params.yaml:
+        build_dataset:
+          start_date: '2019-01-01'
+          end_date: '2021-12-31'
     outs:
-    - path: metrics.yaml
-      md5: fc44a823808d044129e58db1bbcc595e
+    - path: metrics.json
+      md5: 47e7092dabf8d5da9c8c96dfedcabf93
       size: 28
+    - path: models
+      md5: f3dca9869a1b22393dfbd5b8f85fc78e.dir
+      size: 7483
+      nfiles: 1
