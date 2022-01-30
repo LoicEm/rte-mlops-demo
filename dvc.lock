@@ -25,9 +25,9 @@ stages:
       size: 2425603
       nfiles: 1
     - path: rte_mlops_demo/
-      md5: abee9c1506b0b767f224cd524819ddd7.dir
-      size: 18609
-      nfiles: 12
+      md5: 7945b01bde73bb5b04a15cb47373dc0c.dir
+      size: 21540
+      nfiles: 13
     params:
       params.yaml:
         build_dataset:
@@ -35,9 +35,9 @@ stages:
           end_date: '2021-12-31'
     outs:
     - path: metrics.json
-      md5: d072c0a00abeee9e63af326ea00af6c0
+      md5: bb2464fdd88f3144d81ae9c000d31445
       size: 29
     - path: models
-      md5: e8aa61702738179c66b0afb87d79511e.dir
-      size: 158788728
+      md5: 19dafa85527de5c977893cb19601f8ff.dir
+      size: 122255
       nfiles: 1
