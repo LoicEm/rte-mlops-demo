@@ -8,7 +8,7 @@ import pandas as pd
 import sktime
 
 from sktime.forecasting.model_selection import temporal_train_test_split
-from sktime.forecasting.theta import ThetaForecaster
+from sktime.forecasting.arima import ARIMA
 
 from rte_mlops_demo.metrics import fc_mape
 
@@ -36,11 +36,9 @@ if __name__ == "__main__":
 
     # Create a test set of 7 days
     y_train, y_test = temporal_train_test_split(y, test_size=2 * 24 * 7)
-    forecaster = ThetaForecaster()
-    # Thetaforecaster is currently bugged, and cannot output a pandas Series
-    # So we train using a numpy array and it will output numpy arrays too.
-    forecaster.fit(y_train[-1000:].values)
-    y_pred = forecaster.predict(np.arange(1, y_test.size + 1)).flatten()
+    forecaster = ARIMA(order=(2, 1, 1), n_jobs=-1)
+    forecaster.fit(y_train)
+    y_pred = forecaster.predict(np.arange(1, y_test.size + 1))
 
     test_metrics = build_training_metrics(y_test, y_pred)
 
