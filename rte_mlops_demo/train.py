@@ -30,10 +30,8 @@ def save_model(model):
 
 if __name__ == "__main__":
     # Read the data
-    df = pd.read_csv("data/raw_dataset.csv")
-    df["datetime"] = pd.PeriodIndex(
-        pd.to_datetime(df["datetime"]).sort_values(), freq="30min"
-    )
+    df = pd.read_csv("data/raw_dataset.csv").sort_values("datetime")
+    df["datetime"] = pd.PeriodIndex(pd.to_datetime(df["datetime"]), freq="30min")
     y = df.set_index("datetime")["total_consumption"]
 
     # Create a test set of 7 days
